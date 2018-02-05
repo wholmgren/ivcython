@@ -1,7 +1,10 @@
 from __future__ import division, print_function, absolute_import
 from math import exp, sin
 
-from scipy.optimize.cython_optimize cimport zeros
+#from scipy.optimize.cython_optimize cimport zeros
+
+# searches for zeros.pxd
+cimport zeros
 
 NUM_OF_IRRAD = 10
 IL = [sin(il) + 6.0 for il in range(NUM_OF_IRRAD)]
