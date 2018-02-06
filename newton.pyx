@@ -9,7 +9,7 @@ cdef int MAXITER = 50
 
 
 @cython.cdivision(True)
-cdef double newton(callback_type func, double p0, callback_type fprime, tuple args):
+cdef double newton(callback_type_tup func, double p0, callback_type_tup fprime, tuple args):
     # Newton-Rapheson method
     cdef double fder, fval, p
     for iter in range(MAXITER):
