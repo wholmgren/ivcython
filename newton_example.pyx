@@ -1,5 +1,6 @@
 from __future__ import division, print_function, absolute_import
 
+import cython
 import numpy as np
 cimport numpy as np
 
@@ -15,6 +16,7 @@ IL = np.sin(np.linspace(0, NUM_OF_IRRAD, NUM_OF_IRRAD)) + 6
 
 
 # governing equations
+@cython.cdivision(True)
 cdef double f_solarcell(double i, tuple args) :
     cdef double v, il, io, rs, rsh, vt
     v, il, io, rs, rsh, vt = args
@@ -22,10 +24,12 @@ cdef double f_solarcell(double i, tuple args) :
     return il - io * (exp(vd / vt) - 1.0) - vd / rsh - i
 
 
+@cython.cdivision(True)
 cdef double fprime_no_tuple(double i, double v, double il, double io, double rs, double rsh, double vt):
     return -io * exp((v + i * rs) / vt) * rs / vt - rs / rsh - 1
 
 
+@cython.cdivision(True)
 cdef double fprime(double i, tuple args):
     cdef double v, il, io, rs, rsh, vt
     v, il, io, rs, rsh, vt = args
